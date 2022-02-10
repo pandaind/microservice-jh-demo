@@ -1,0 +1,25 @@
+{
+  "microserviceName": "roomservice",
+  "clientRootFolder": "roomservice",
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "roomNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [],
+  "service": "serviceImpl",
+  "dto": "no",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Room",
+  "changelogDate": "20210603180659"
+}

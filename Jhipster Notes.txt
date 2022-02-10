@@ -1,0 +1,73 @@
+Microservice
+------------
+- Small autonomous applications working together.
+- Service-oriented architecture composed of loosely coupled of elements.
+
+
+JHipster
+--------
+Components :
+
+1. JHipster Registry :
+	a) Eureka: service discovery and basic round-robin load-balancing
+	b) Spring Cloud Config: provides runtime configurations to all applications
+	c) Administrative Server: Dashboard to manage and monitor applications
+
+2. JHipster API Gateway: 
+	- Gateway Entrance to microservices. Provides routing, safeguard for QoS(quality of services), Security and API docs.
+	- Load Balancing using ribbon
+	- Circuit breaker using hystrix
+	- Security using jwt (JSON web token) Header.Payload.Signature
+	- Automatic documentation using swagger API
+
+Creating JHipster API Gateway:
+------------------------------
+- mkdir simple-hotel-jhipster
+- cd simple-hotel-jhipster
+- jhipster and choose gateway
+
+Creating Microservice:
+----------------------
+- mkdir simple-hotel-room-svc
+- cd simple-hotel-room-svc
+- jhipster and choose Microservice Application
+
+Creating JHipster Registry:
+---------------------------
+- download the jar file from th githud releases of JHipster Registry
+- java -jar jhipster-registry-6.7.1.jar --spring.security.user.password=admin --jhipster.security.authentication.jwt.secret=my-secret-key-which-should-be-changed-in-production-and-be-base64-encoded --spring.cloud.config.server.composite.0.type=native --spring.cloud.config.server.composite.0.search-locations=file:./central-config
+
+Creating new entity:
+--------------------
+- We will create: a database table, a liquibase changeset, a JPA entity, a spring data repository, a spring MVC rest controller with CRUD
+- cd simple-hotel-room-svc
+- jhipster entity room
+
+Creating a config directory:
+----------------------------
+- mkdir central-config
+- download the application.yml from https://github.com/jhipster/jhipster-registry-sample-config
+- place it in central-config
+
+
+-> start jhipster registry 
+-> start room-svc
+-> start jhipster gateway
+
+
+-> start the postman. get the API docs URL from room-svc and import it into postman.
+-> create a room. before that get the API token from the gateway. from the swagger UI for testing purpose
+-> use the same token to getAllRooms
+-> Why messaging. To avoid exponential retry 3 retry -> 9 retry -> 27 retry
+-> Create one more service reservation-svc using the same process as room-svc
+
+-> start reservation-svc
+
+Docker
+------
+- docker-compose sub-generator: pulls the latest jhispter registry, starts correct order & can scale up n down
+- mkdir docker-compose
+- cd docker-compose
+- jhispter docker-compose
+- build all the svc image : mvnw -ntp -Pprod verify jib:dockerBuild
+- docker-compose up -d

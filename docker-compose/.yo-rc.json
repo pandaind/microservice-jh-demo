@@ -1,0 +1,14 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "simple-hotel-jhipster",
+      "simple-hotel-reservation-svc",
+      "simple-hotel-room-svc"
+    ],
+    "directoryPath": "../",
+    "gatewayType": "SpringCloudGateway",
+    "monitoring": "prometheus",
+    "serviceDiscoveryType": "eureka",
+    "jwtSecretKey": "YjNlZGYwMDA5YWUyNzc0NzAzYWRlOWM0YjY3YTg1MmVmOTBhNThmMzQzYjEyMTc1YjU5NTYyNzY2NTJhOGM5NTUwZjQ3OWRlYzQ1ODNkYjVhNTIwN2ViMDYzYmZjNzM3NjkxOA=="
+  }
+}
